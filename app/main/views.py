@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for
 from . import main
 from ..models import Todo
 from .forms import NameForm
+from .. import db
 
 @main.route('/')
 def index():
@@ -21,5 +22,8 @@ def name( name ):
 def add():
     form = NameForm()
     if form.validate_on_submit():
+        todo = Todo()
+        db.session.add(todo)
+        db.session.commit()
         return redirect('/todos')
     return render_template( 'add.html', form = form )
