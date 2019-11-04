@@ -15,3 +15,7 @@ def hello():
 @main.route('/names/<name>')
 def name( name ):
     return render_template( 'name.html', name = name )
+
+@main.route('/add')
+def add():
+    return render_template('add.html')
