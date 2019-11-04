@@ -5,7 +5,7 @@ from . import main
 def index():
     return  render_template( 'index.html' )
 
-@main.route('/hello')
+@main.route('/todos')
 def hello():
     return render_template( 'hello.html' )
 
