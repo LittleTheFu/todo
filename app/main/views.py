@@ -1,6 +1,7 @@
-from flask import render_template
+from flask import render_template, redirect, url_for
 from . import main
 from ..models import Todo
+from .forms import NameForm
 
 @main.route('/')
 def index():
@@ -16,6 +17,9 @@ def hello():
 def name( name ):
     return render_template( 'name.html', name = name )
 
-@main.route('/add')
+@main.route('/add', methods=['GET', 'POST'])
 def add():
-    return render_template('add.html')
+    form = NameForm()
+    if form.validate_on_submit():
+        return redirect('/todos')
+    return render_template( 'add.html', form = form )
