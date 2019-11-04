@@ -1,1 +1,19 @@
-<h1>Hello</h1>
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+  {% for todo in todos %}
+    <h1>{{ todo.id }}</h1>
+    <h2>{{ todo.name }}</h2>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

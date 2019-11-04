@@ -1,5 +1,6 @@
 from flask import render_template
 from . import main
+from ..models import Todo
 
 @main.route('/')
 def index():
@@ -7,7 +8,9 @@ def index():
 
 @main.route('/todos')
 def hello():
-    return render_template( 'hello.html' )
+    todos = Todo.query.all()
+    print(todos)
+    return render_template( 'hello.html', todos = todos )
 
 @main.route('/names/<name>')
 def name( name ):
