@@ -1,1 +1,15 @@
-<h1>Hello World!</h1>
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+  <h1>Hello, Bootstrap</h1>
+  <button type="button" class="btn btn-primary">Primary</button>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
