@@ -23,6 +23,7 @@ def add():
     form = NameForm()
     if form.validate_on_submit():
         todo = Todo()
+        todo.name = form.name.data
         db.session.add(todo)
         db.session.commit()
         return redirect('/todos')
