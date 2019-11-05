@@ -5,3 +5,4 @@
 data-dev.sqlite
 migrations/__pycache__/
 migrations/versions/
+app/auth/__pycache__/
