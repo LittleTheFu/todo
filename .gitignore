@@ -4,3 +4,4 @@
 .DS_Store
 data-dev.sqlite
 migrations/__pycache__/
+migrations/versions/
