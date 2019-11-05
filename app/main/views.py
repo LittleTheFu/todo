@@ -3,10 +3,11 @@ from . import main
 from ..models import Todo
 from .forms import NameForm
 from .. import db
+from datetime import datetime
 
 @main.route('/')
 def index():
-    return  render_template( 'index.html' )
+    return  render_template( 'index.html', current_time=datetime.utcnow() )
 
 @main.route('/todos')
 def todo():
