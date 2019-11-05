@@ -16,7 +16,7 @@
       <ul class="list-group">
         {% for todo in todos %}
           <li class="list-group-item">
-            <h3>{{ todo.id }} : {{ todo.name }}</h3>
+            <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
             <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">Delete</a>
           </li>
         {% endfor %}
