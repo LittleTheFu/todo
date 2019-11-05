@@ -16,10 +16,7 @@ def todo():
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
-    todo = Todo.query.filter_by(id=id).first()
-    if todo:
-        db.session.delete(todo)
-        db.session.commit()
+    Todo.delete(id)
     return redirect(url_for('.todo'))
 
 @main.route('/names/<name>')
@@ -30,9 +27,6 @@ def name( name ):
 def add():
     form = NameForm()
     if form.validate_on_submit():
-        todo = Todo()
-        todo.name = form.name.data
-        db.session.add(todo)
-        db.session.commit()
+        Todo.add(form.name.data)
         return redirect('/todos')
     return render_template( 'add.html', form = form )

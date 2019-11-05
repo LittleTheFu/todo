@@ -12,9 +12,10 @@
 
 <ul class="list-group">
   {% for todo in todos %}
-    <h1>{{ todo.id }}</h1>
-    <h2>{{ todo.name }}</h2>
-    <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">Delete</a>
+    <li class="list-group-item">
+      <h3>{{ todo.id }} : {{ todo.name }}</h3>
+      <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">Delete</a>
+    </li>
   {% endfor %}
 </ul>
 {% endblock %}
