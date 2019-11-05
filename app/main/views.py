@@ -9,20 +9,18 @@ def index():
     return  render_template( 'index.html' )
 
 @main.route('/todos')
-def hello():
+def todo():
     todos = Todo.query.all()
     print(todos)
-    return render_template( 'hello.html', todos = todos )
+    return render_template( 'todo.html', todos = todos )
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@")
-    # print(id)
     todo = Todo.query.filter_by(id=id).first()
     if todo:
         db.session.delete(todo)
         db.session.commit()
-    return redirect(url_for('.hello'))
+    return redirect(url_for('.todo'))
 
 @main.route('/names/<name>')
 def name( name ):

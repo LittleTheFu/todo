@@ -10,7 +10,6 @@
   {% for todo in todos %}
     <h1>{{ todo.id }}</h1>
     <h2>{{ todo.name }}</h2>
-    <!-- <button type="button" class="btn btn-primary">Del</button> -->
     <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">Link Button</a>
   {% endfor %}
 </ul>
