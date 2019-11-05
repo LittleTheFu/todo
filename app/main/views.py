@@ -14,6 +14,16 @@ def hello():
     print(todos)
     return render_template( 'hello.html', todos = todos )
 
+@main.route('/todos/del/<id>')
+def delTodo(id):
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    # print(id)
+    todo = Todo.query.filter_by(id=id).first()
+    if todo:
+        db.session.delete(todo)
+        db.session.commit()
+    return redirect(url_for('.hello'))
+
 @main.route('/names/<name>')
 def name( name ):
     return render_template( 'name.html', name = name )
