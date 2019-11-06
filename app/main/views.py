@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
 from . import main
-from ..models import Todo
+from ..models import Todo, User
 from .forms import NameForm
 from .. import db
 from datetime import datetime
@@ -8,6 +8,16 @@ from datetime import datetime
 @main.route('/')
 def index():
     return  render_template( 'index.html', current_time=datetime.utcnow() )
+
+@main.route('/users')
+def users():
+    users = User.query.all()
+    return render_template( 'user.html', users = users )
+
+@main.route('/users/del/<id>')
+def delUser(id):
+    User.delete(id)
+    return redirect(url_for('.users'))
 
 @main.route('/todos')
 def todo():
