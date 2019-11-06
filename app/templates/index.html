@@ -3,6 +3,12 @@
 
 
 {% block content %}
+  {% if current_user.is_authenticated %}
+    {{ current_user.email }} @ {{ current_user.password_hash }}
+  {% else %}
+    Stranger
+  {% endif %}
+
   <h1>Hello, Bootstrap</h1>
   <button type="button" class="btn btn-primary">Primary</button>
 
