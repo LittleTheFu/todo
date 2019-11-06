@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+    {{ current_user.email }} @ {{ current_user.password_hash }}
+  {% else %}
+    Stranger
+  {% endif %}
+
+  <a href="{{ url_for('.logout') }}" class="btn btn-info" role="button">Logout</a>
+
+{% endblock %}

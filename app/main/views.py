@@ -4,10 +4,20 @@ from ..models import Todo, User
 from .forms import NameForm
 from .. import db
 from datetime import datetime
+from flask_login import logout_user
 
 @main.route('/')
 def index():
     return  render_template( 'index.html', current_time=datetime.utcnow() )
+
+@main.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
+
+@main.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 @main.route('/users')
 def users():

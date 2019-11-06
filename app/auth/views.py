@@ -12,7 +12,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(url_for('main.todo'))
+            return redirect(url_for('main.profile'))
     flash('Invalid email or password.')
     return render_template('auth/login.html', form=form)
 
