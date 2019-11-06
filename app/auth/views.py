@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect, url_for, flash
 from . import auth
 from .forms import LoginForm
 from flask_login import login_user
@@ -11,6 +11,6 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-        print("@@@@@@@@@@@@@@@@")
-        print("success login")
+            return redirect(url_for('main.todo'))
+    flash('Invalid email or password.')
     return render_template('auth/login.html', form=form)
