@@ -1,8 +1,5 @@
-/app/main/__pycache__/
-/app/__pycache__/
-/__pycache__/
+
 .DS_Store
 data-dev.sqlite
-migrations/__pycache__/
-migrations/versions/
-app/auth/__pycache__/
+
+**/__pycache__/
