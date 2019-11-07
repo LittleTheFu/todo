@@ -18,7 +18,9 @@
         </button>
         <a class="navbar-brand" href="#">
           {% if current_user.is_authenticated %}
-            {{ current_user.email }}
+            <a href="{{ url_for('main.todo') }}" class="btn btn-info" role="button">
+              {{ current_user.email }}
+            </a>
             <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">
               Logout
             </a>
