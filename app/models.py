@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64),unique=True,index=True)
     password_hash = db.Column(db.String(128))
+    todos = db.relationship('Todo',backref='user')
 
     @property
     def password(self):
@@ -38,10 +39,11 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     create_date = db.Column(db.Date)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     @staticmethod
-    def add(name):
-        todo = Todo()
+    def add(name, user):
+        todo = Todo(user=user)
         todo.name = name
         todo.create_date = datetime.utcnow()
         db.session.add(todo)

@@ -4,6 +4,7 @@ from ..models import Todo, User
 from .forms import NameForm
 from .. import db
 from datetime import datetime
+from flask_login import current_user
 
 @main.route('/')
 def index():
@@ -42,6 +43,6 @@ def name( name ):
 def add():
     form = NameForm()
     if form.validate_on_submit():
-        Todo.add(form.name.data)
+        Todo.add(form.name.data, current_user)
         return redirect('/todos')
     return render_template( 'add.html', form = form )
