@@ -1,8 +1,7 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 {% block title %}This is an example page{% endblock %}
 
-
-{% block content %}
+{% block page_body %}
   {% if current_user.is_authenticated %}
     {{ current_user.email }} @ {{ current_user.password_hash }}
   {% else %}

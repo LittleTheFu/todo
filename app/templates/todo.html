@@ -1,12 +1,7 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 {% block title %}This is an example page{% endblock %}
 
-{% block head %}
-{{ super() }}
-{% endblock %}
-
-{% block content %}
-
+{% block page_body %}
 <a href="{{ url_for('auth.login') }}" class="btn btn-info" role="button">
   Login
 </a>
