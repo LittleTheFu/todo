@@ -12,10 +12,10 @@
   <div class="col-md-6">
     <ul class="list-group">
       {% for user in users %}
-        <li class="list-group-item">
+        <a href="{{ url_for('main.todo') }}" class="list-group-item">
           <h3>{{ user.id }} : {{ user.email }}</h3>
           <a href="{{ url_for('.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
-        </li>
+        </a>
       {% endfor %}
     </ul>
   </div>
