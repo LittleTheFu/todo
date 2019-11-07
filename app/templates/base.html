@@ -17,6 +17,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
+          
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('main.todo') }}" class="btn btn-info" role="button">
               {{ current_user.email }}
@@ -29,6 +30,11 @@
             Click Here To Login
           </a>
           {% endif %}
+
+          <a href="{{ url_for('main.users') }}" class="btn btn-info" role="button">
+            See All Users
+          </a>
+
         </a>
       </div>
     </div>
