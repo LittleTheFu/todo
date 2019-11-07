@@ -27,7 +27,11 @@ def delUser(id):
 @main.route('/todos')
 def todo():
     todos = Todo.query.all()
-    print(todos)
+    return render_template( 'todo.html', todos = todos )
+
+@main.route('/todos/<user_id>')
+def todoByUser(user_id):
+    todos = Todo.getByUserId(user_id)
     return render_template( 'todo.html', todos = todos )
 
 @main.route('/todos/del/<id>')

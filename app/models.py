@@ -55,4 +55,7 @@ class Todo(db.Model):
         if todo:
             db.session.delete(todo)
             db.session.commit()
-        pass
+
+    @staticmethod
+    def getByUserId(id):
+        return Todo.query.join(User, Todo.user_id==id)
