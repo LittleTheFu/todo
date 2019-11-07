@@ -44,8 +44,6 @@ class Todo(db.Model):
         todo = Todo()
         todo.name = name
         todo.create_date = datetime.utcnow()
-        print("@@@@@@@@@@@@@@@@@@")
-        print(todo.create_date)
         db.session.add(todo)
         db.session.commit()
 
