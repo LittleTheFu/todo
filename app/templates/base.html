@@ -20,7 +20,9 @@
           {% if current_user.is_authenticated %}
             {{ current_user.email }}
           {% else %}
-            Stranger
+          <a href="{{ url_for('auth.login') }}" class="btn btn-info" role="button">
+            Click Here To Login
+          </a>
           {% endif %}
         </a>
       </div>
