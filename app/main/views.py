@@ -17,7 +17,7 @@ def profile():
 @main.route('/users')
 def users():
     users = User.query.all()
-    return render_template( 'user.html', users = users )
+    return render_template( 'users.html', users = users )
 
 @main.route('/users/del/<id>')
 def delUser(id):
@@ -25,19 +25,19 @@ def delUser(id):
     return redirect(url_for('.users'))
 
 @main.route('/todos')
-def todo():
+def todos():
     todos = Todo.query.all()
-    return render_template( 'todo.html', todos = todos )
+    return render_template( 'todos.html', todos = todos )
 
 @main.route('/todos/<user_id>')
 def todoByUser(user_id):
     todos = Todo.getByUserId(user_id)
-    return render_template( 'todo.html', todos = todos )
+    return render_template( 'todos.html', todos = todos )
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
     Todo.delete(id)
-    return redirect(url_for('.todo'))
+    return redirect(url_for('.todoByUser', user_id = current_user.id))
 
 @main.route('/names/<name>')
 def name( name ):
