@@ -32,7 +32,10 @@ def todos():
 @main.route('/todos/<user_id>')
 def todoByUser(user_id):
     todos = Todo.getByUserId(user_id)
-    return render_template( 'todos.html', todos = todos )
+    canEdit = False
+    if ( current_user is not None ) and ( current_user.id == int(user_id) ):
+        canEdit = True
+    return render_template( 'todos.html', todos = todos, canEdit = canEdit )
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
