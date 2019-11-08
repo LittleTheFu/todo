@@ -48,5 +48,5 @@ def add():
     form = NameForm()
     if form.validate_on_submit():
         Todo.add(form.name.data, current_user)
-        return redirect('/todos')
+        return redirect(url_for('.todoByUser', user_id = current_user.id))
     return render_template( 'add.html', form = form )
