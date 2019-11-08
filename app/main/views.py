@@ -35,7 +35,7 @@ def todoByUser(user_id):
     canEdit = False
     if ( current_user is not None ) and ( current_user.id == int(user_id) ):
         canEdit = True
-    return render_template( 'todos.html', todos = todos, canEdit = canEdit )
+    return render_template( 'todos.html', user_id = user_id, todos = todos, canEdit = canEdit )
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
@@ -54,6 +54,7 @@ def add():
         return redirect(url_for('.todoByUser', user_id = current_user.id))
     return render_template( 'add.html', form = form )
 
-@main.route('/user_info')
-def userInfo():
-    return render_template('user_info.html')
+@main.route('/user_info/<id>')
+def userInfo(id):
+    user = User.query.get(int(id))
+    return render_template('user_info.html', id = user.id, email = user.email)

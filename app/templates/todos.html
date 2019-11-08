@@ -35,7 +35,7 @@
         {% for todo in todos %}
           <li class="list-group-item">
             <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
-            <h3>from {{ todo.user_id}}</h3>
+            <h3>from {{ user_id}}</h3>
             {% if canEdit %}
               <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
                 Delete
@@ -46,7 +46,7 @@
       </ul>
     </div>
     <div class="col-md-6">
-      <a href="{{ url_for('.userInfo') }}" class="btn btn-info" role="button">
+      <a href="{{ url_for('.userInfo', id=user_id) }}" class="btn btn-info" role="button">
         Info
       </a>
       {% if canEdit == true %}

@@ -16,7 +16,7 @@
           <h3>{{ user.id }} : {{ user.email }}</h3>
           <a href="{{ url_for('.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
           <a href="" class="btn btn-info" role="button">Follow</a>
-          <a href="{{ url_for('.userInfo') }}" class="btn btn-info" role="button">Info</a>
+          <a href="{{ url_for('.userInfo', id=user.id) }}" class="btn btn-info" role="button">Info</a>
           <a href="{{ url_for('.todoByUser', user_id=user.id) }}" class="btn btn-info" role="button">Todos</a>
         </a>
       {% endfor %}
