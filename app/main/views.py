@@ -53,3 +53,7 @@ def add():
         Todo.add(form.name.data, current_user)
         return redirect(url_for('.todoByUser', user_id = current_user.id))
     return render_template( 'add.html', form = form )
+
+@main.route('/user_info')
+def userInfo():
+    return render_template('user_info.html')
