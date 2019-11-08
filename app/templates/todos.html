@@ -46,6 +46,9 @@
       </ul>
     </div>
     <div class="col-md-6">
+      <a href="{{ url_for('.userInfo') }}" class="btn btn-info" role="button">
+        Info
+      </a>
       {% if canEdit == true %}
       <a href="{{ url_for('.add') }}" class="btn btn-info" role="button">
         Add todo
