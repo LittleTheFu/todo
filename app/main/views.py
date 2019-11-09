@@ -58,8 +58,6 @@ def add():
 @main.route('/user_info/<id>')
 def userInfo(id):
     user = User.query.get(int(id))
-    print("#####")
-    print(user.to_users.all())
     return render_template('user_info.html',
                             id = user.id,
                             email = user.email,

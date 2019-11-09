@@ -19,12 +19,12 @@ class User(UserMixin, db.Model):
     todos = db.relationship('Todo',backref='user')
     from_users = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
-                                backref='from_user',
+                                backref=db.backref('from_user', lazy='joined'),
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
     to_users = db.relationship('Follow',
                                 foreign_keys=[Follow.to_id],
-                                backref='to_user',
+                                backref=db.backref('to_user', lazy='joined'),
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
 
