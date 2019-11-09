@@ -33,11 +33,6 @@ class User(UserMixin, db.Model):
             f = Follow( from_user = self, to_user = user )
             db.session.add(f)
             db.session.commit()
-            # print("@@@@@@@")
-            # print(self.from_position_users.all())
-            # print("@@@@@@")
-            # print(self.to_position_users.all())
-            # print("@@@@@")
 
     def unfollow(self, user):
         f = self.to_position_users.filter_by(to_id=user.id).first()
@@ -48,15 +43,6 @@ class User(UserMixin, db.Model):
     def is_following(self, user):
         if user.id is None:
             return False
-        # print("^^^^^^^^^^")
-        # print( user.id)
-        # print("^^^^^^^^^^")
-        # print(self.to_position_users.filter_by(to_id=user.id).first())
-        # print("^^^^^^^^^^")
-        # print(self.to_position_users.all())
-        # print("%%%%%%%%%")
-        # print(self.from_position_users.all())
-        # print("%%%%%%%%%")
         return self.from_position_users.filter_by(to_id=user.id).first() is not None
 
     def is_followed_by(self, user):
@@ -99,10 +85,6 @@ class Todo(db.Model):
         todo = Todo(user=user)
         todo.name = name
         todo.create_date = datetime.utcnow()
-        print('@@@@@@@@@@')
-        print(todo.user.id)
-        print(todo.user.email)
-        print(todo.user.password_hash)
         db.session.add(todo)
         db.session.commit()
 
