@@ -61,7 +61,7 @@ def userInfo(id):
     return render_template('user_info.html',
                             id = user.id,
                             email = user.email,
-                            followers = user.from_users.all())
+                            followers = user.from_position_users.all())
 
 @main.route('/follow/<user_id>')
 def follow(user_id):

@@ -17,12 +17,12 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64),unique=True,index=True)
     password_hash = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
-    from_users = db.relationship('Follow',
+    from_position_users = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
                                 backref=db.backref('from_user', lazy='joined'),
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
-    to_users = db.relationship('Follow',
+    to_position_users = db.relationship('Follow',
                                 foreign_keys=[Follow.to_id],
                                 backref=db.backref('to_user', lazy='joined'),
                                 cascade='all, delete-orphan',
@@ -34,13 +34,13 @@ class User(UserMixin, db.Model):
             db.session.add(f)
             db.session.commit()
             # print("@@@@@@@")
-            # print(self.from_users.all())
+            # print(self.from_position_users.all())
             # print("@@@@@@")
-            # print(self.to_users.all())
+            # print(self.to_position_users.all())
             # print("@@@@@")
 
     def unfollow(self, user):
-        f = self.to_users.filter_by(to_id=user.id).first()
+        f = self.to_position_users.filter_by(to_id=user.id).first()
         if f:
             db.session.delete(f)
             db.session.commit()
@@ -51,18 +51,18 @@ class User(UserMixin, db.Model):
         # print("^^^^^^^^^^")
         # print( user.id)
         # print("^^^^^^^^^^")
-        # print(self.to_users.filter_by(to_id=user.id).first())
+        # print(self.to_position_users.filter_by(to_id=user.id).first())
         # print("^^^^^^^^^^")
-        # print(self.to_users.all())
+        # print(self.to_position_users.all())
         # print("%%%%%%%%%")
-        # print(self.from_users.all())
+        # print(self.from_position_users.all())
         # print("%%%%%%%%%")
-        return self.from_users.filter_by(to_id=user.id).first() is not None
+        return self.from_position_users.filter_by(to_id=user.id).first() is not None
 
     def is_followed_by(self, user):
         if user.id is None:
             return False
-        return self.to_users.filter_by(from_id=user.id).first() is not None
+        return self.to_position_users.filter_by(from_id=user.id).first() is not None
 
     @property
     def password(self):
