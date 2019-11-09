@@ -59,8 +59,7 @@ def add():
 def userInfo(id):
     user = User.query.get(int(id))
     return render_template('user_info.html',
-                            id = user.id,
-                            email = user.email,
+                            user = user,
                             followers = user.from_viewers.all())
 
 @main.route('/follow/<user_id>')
