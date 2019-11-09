@@ -33,6 +33,11 @@ class User(UserMixin, db.Model):
             f = Follow( from_user = self, to_user = user )
             db.session.add(f)
             db.session.commit()
+            # print("@@@@@@@")
+            # print(self.from_users.all())
+            # print("@@@@@@")
+            # print(self.to_users.all())
+            # print("@@@@@")
 
     def unfollow(self, user):
         f = self.to_users.filter_by(to_id=user.id).first()
@@ -43,12 +48,21 @@ class User(UserMixin, db.Model):
     def is_following(self, user):
         if user.id is None:
             return False
-        return self.to_users.filter_by(to_id=user.id).first() is not None
+        # print("^^^^^^^^^^")
+        # print( user.id)
+        # print("^^^^^^^^^^")
+        # print(self.to_users.filter_by(to_id=user.id).first())
+        # print("^^^^^^^^^^")
+        # print(self.to_users.all())
+        # print("%%%%%%%%%")
+        # print(self.from_users.all())
+        # print("%%%%%%%%%")
+        return self.from_users.filter_by(to_id=user.id).first() is not None
 
     def is_followed_by(self, user):
         if user.id is None:
             return False
-        return self.from_users.filter_by(from_id=user.id).first() is not None
+        return self.to_users.filter_by(from_id=user.id).first() is not None
 
     @property
     def password(self):
