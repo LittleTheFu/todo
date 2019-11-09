@@ -17,14 +17,38 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64),unique=True,index=True)
     password_hash = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
-    from_ids = db.relationship('Follow',
+    from_users = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
                                 backref='from',
-                                cascade='all, delete-orphan')
-    to_ids = db.relationship('Follow',
+                                cascade='all, delete-orphan',
+                                lazy='dynamic')
+    to_users = db.relationship('Follow',
                                 foreign_keys=[Follow.to_id],
                                 backref='to',
-                                cascade='all, delete-orphan')
+                                cascade='all, delete-orphan',
+                                lazy='dynamic')
+
+    def follow(self, user):
+        if not self.is_following(user):
+            f = Follow( from_user = self, to_user = user )
+            db.session.add(f)
+            db.session.commit()
+
+    def unfollow(self, user):
+        f = self.to_users.filter_by(to_id==user.id).first()
+        if f:
+            db.session.delete(f)
+            db.session.commit()
+
+    def is_following(self, user):
+        if user.id is None:
+            return False
+        return self.to_users.filter_by(to_id==user.id).first is not None
+
+    def is_followed_by(self, user):
+        if user.id is None:
+            return False
+        return self.from_users.filter_by(from_id==user.id).first is not None
 
     @property
     def password(self):
