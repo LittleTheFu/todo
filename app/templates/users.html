@@ -17,6 +17,7 @@
           <a href="{{ url_for('.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('.follow', user_id=user.id)}}" class="btn btn-info" role="button">Follow</a>
+            <a href="" class="btn btn-info" role="button">UnFollow</a>
           {% endif %}
           <a href="{{ url_for('.userInfo', id=user.id) }}" class="btn btn-info" role="button">Info</a>
           <a href="{{ url_for('.todoByUser', user_id=user.id) }}" class="btn btn-info" role="button">Todos</a>
