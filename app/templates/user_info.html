@@ -3,4 +3,10 @@
 
 {% block page_body %}
   <h1>Info  :  {{ id }} ### {{ email}}</h1>
+  <h1>Follow : <h1>
+
+  {% for follower in followers %}
+    {{ follower.id }} ## {{ follower.email }}
+    {{ follower }}
+  {% endfor %}
 {% endblock %}
