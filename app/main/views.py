@@ -59,3 +59,10 @@ def add():
 def userInfo(id):
     user = User.query.get(int(id))
     return render_template('user_info.html', id = user.id, email = user.email)
+
+@main.route('/follow/<user_id>')
+def follow(user_id):
+    user = User.query.get(int(user_id))
+    if user is not None:
+        current_user.follow(user)
+    return redirect(url_for('.users'))

@@ -19,12 +19,12 @@ class User(UserMixin, db.Model):
     todos = db.relationship('Todo',backref='user')
     from_users = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
-                                backref='from',
+                                backref='from_user',
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
     to_users = db.relationship('Follow',
                                 foreign_keys=[Follow.to_id],
-                                backref='to',
+                                backref='to_user',
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
 
@@ -35,7 +35,7 @@ class User(UserMixin, db.Model):
             db.session.commit()
 
     def unfollow(self, user):
-        f = self.to_users.filter_by(to_id==user.id).first()
+        f = self.to_users.filter_by(to_id=user.id).first()
         if f:
             db.session.delete(f)
             db.session.commit()
@@ -43,12 +43,12 @@ class User(UserMixin, db.Model):
     def is_following(self, user):
         if user.id is None:
             return False
-        return self.to_users.filter_by(to_id==user.id).first is not None
+        return self.to_users.filter_by(to_id=user.id).first() is not None
 
     def is_followed_by(self, user):
         if user.id is None:
             return False
-        return self.from_users.filter_by(from_id==user.id).first is not None
+        return self.from_users.filter_by(from_id=user.id).first() is not None
 
     @property
     def password(self):
