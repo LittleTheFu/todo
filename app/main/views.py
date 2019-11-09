@@ -69,3 +69,10 @@ def follow(user_id):
     if user is not None:
         current_user.follow(user)
     return redirect(url_for('.users'))
+
+@main.route('/unfollow/<user_id>')
+def unfollow(user_id):
+    user = User.query.get(int(user_id))
+    if user is not None:
+        current_user.unfollow(user)
+    return redirect(url_for('.users'))

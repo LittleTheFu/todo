@@ -35,7 +35,7 @@ class User(UserMixin, db.Model):
             db.session.commit()
 
     def unfollow(self, user):
-        f = self.to_position_users.filter_by(to_id=user.id).first()
+        f = self.from_position_users.filter_by(to_id=user.id).first()
         if f:
             db.session.delete(f)
             db.session.commit()
