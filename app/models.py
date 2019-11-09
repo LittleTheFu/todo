@@ -3,12 +3,28 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 
+class Follow(db.Model):
+    from_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        primary_key=True)
+    to_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        primary_key=True)
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64),unique=True,index=True)
     password_hash = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
+    from_ids = db.relationship('Follow',
+                                foreign_keys=[Follow.from_id],
+                                backref='from',
+                                cascade='all, delete-orphan')
+    to_ids = db.relationship('Follow',
+                                foreign_keys=[Follow.to_id],
+                                backref='to',
+                                cascade='all, delete-orphan')
 
     @property
     def password(self):
@@ -33,7 +49,6 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
 class Todo(db.Model):
     __tablename__ = 'todos'
     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +61,10 @@ class Todo(db.Model):
         todo = Todo(user=user)
         todo.name = name
         todo.create_date = datetime.utcnow()
+        print('@@@@@@@@@@')
+        print(todo.user.id)
+        print(todo.user.email)
+        print(todo.user.password_hash)
         db.session.add(todo)
         db.session.commit()
 
