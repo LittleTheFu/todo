@@ -52,6 +52,16 @@ def logout():
 def unconfirmed():
     return render_template('auth/unconfirmed.html')
 
+@auth.route('/send_confirm')
+def send_confirm():
+    token = current_user.generate_confirmation_token()
+    msg = Message('test_mail', sender='LttLTheFu@hotmail.com', recipients=[current_user.email])
+    msg.body=token
+    address = url_for('auth.confirm', token=token)
+    msg.html= 'http://127.0.0.1:5000' + address
+    mail.send(msg)
+    return redirect(url_for('auth.unconfirmed'))
+
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated \

@@ -1,1 +1,11 @@
-<h1>Unconfirmed</h1>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Unconfirmed{% endblock %}
+
+{% block page_body %}
+  <h1>Unconfirmed</h1>
+  <a href="{{ url_for('auth.send_confirm') }}" class="btn btn-info" role="button">
+    Send Confirm URL again!
+  </a>
+{% endblock %}
