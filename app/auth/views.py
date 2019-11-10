@@ -3,7 +3,8 @@ from . import auth
 from .forms import LoginForm, RegistrationForm
 from flask_login import login_user, logout_user
 from ..models import User
-from .. import db
+from .. import db, mail
+from flask_mail import Message
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,6 +25,10 @@ def register():
                     password=form.password.data)
         db.session.add(user)
         db.session.commit()
+        msg = Message('test_mail', sender='LttLTheFu@hotmail.com', recipients=[form.email.data.lower()])
+        msg.body='test body'
+        msg.html='html'
+        mail.send(msg)
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 

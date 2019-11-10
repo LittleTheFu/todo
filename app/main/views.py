@@ -82,7 +82,7 @@ def unfollow(user_id):
 # test email
 @main.route('/test_mail')
 def test_mail():
-    msg = Message('test_mail', sender='@.com', recipients=['@.com'])
+    msg = Message('test_mail', sender='', recipients=[''])
     msg.body='test body'
     msg.html='html'
     mail.send(msg)
