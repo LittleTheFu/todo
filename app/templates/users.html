@@ -13,7 +13,8 @@
     <ul class="list-group">
       {% for user in users %}
         <a href="{{ url_for('main.todoByUser', user_id=user.id) }}" class="list-group-item">
-          <h3>{{ user.id }} : {{ user.email }}</h3>
+          <img src="{{ avatars.default() }}">
+          <h3>{{ user.email }}</h3>
           <a href="{{ url_for('main.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
           {% if current_user.is_authenticated %}
             {% if current_user.is_following(user) %}
