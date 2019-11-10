@@ -5,6 +5,15 @@ from flask_login import login_user, logout_user
 from ..models import User
 from .. import db, mail
 from flask_mail import Message
+from flask_login import current_user
+
+@auth.route('/confirm/<token>')
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('main.index'))
+    if current_user.confirm(token):
+        db.session.commit()
+    return redirect(url_for('main.index'))
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -25,9 +34,11 @@ def register():
                     password=form.password.data)
         db.session.add(user)
         db.session.commit()
+        token = user.generate_confirmation_token()
         msg = Message('test_mail', sender='LttLTheFu@hotmail.com', recipients=[form.email.data.lower()])
-        msg.body='test body'
-        msg.html='html'
+        msg.body=token
+        address = url_for('auth.confirm', token=token)
+        msg.html= 'http://127.0.0.1:5000' + address
         mail.send(msg)
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
