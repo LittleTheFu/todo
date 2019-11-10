@@ -4,15 +4,16 @@
 {% block page_body %}
   <div class="container">
     <div class="row">
-      <h1> {{ user.id }} </h1>
+      <img src="{{ avatars.default() }}">
       <h1> {{ user.email }} </h1>
+      <h1> Follows: </h1>
     </div>
     <div class="row">
       <div class="col-md-6">
         <ul class="list-group">
           {% for follower in followers %}
             <a href="{{ url_for('main.userInfo', id=follower.to_user.id) }}" class="list-group-item">
-              <h3>{{ follower.to_user.id }}</h3>
+              <img src="{{ avatars.default() }}">
               <h3>{{ follower.to_user.email }}</h3>
             </a>
           {% endfor %}
