@@ -47,3 +47,7 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+@auth.route('/unconfirmed')
+def unconfirmed():
+    return render_template("auth/unconfirmed.html")
