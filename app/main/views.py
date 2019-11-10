@@ -44,7 +44,7 @@ def todoByUser(user_id):
 @main.route('/todos/del/<id>')
 def delTodo(id):
     Todo.delete(id)
-    return redirect(url_for('.todoByUser', user_id = current_user.id))
+    return redirect(url_for('main.todoByUser', user_id = current_user.id))
 
 @main.route('/names/<name>')
 def name( name ):
@@ -55,7 +55,7 @@ def add():
     form = NameForm()
     if form.validate_on_submit():
         Todo.add(form.name.data, current_user)
-        return redirect(url_for('.todoByUser', user_id = current_user.id))
+        return redirect(url_for('main.todoByUser', user_id = current_user.id))
     return render_template( 'add.html', form = form )
 
 @main.route('/user_info/<id>')

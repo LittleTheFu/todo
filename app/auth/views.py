@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from . import auth
 from .forms import LoginForm, RegistrationForm
 from flask_login import login_user, logout_user
@@ -50,4 +50,11 @@ def logout():
 
 @auth.route('/unconfirmed')
 def unconfirmed():
-    return render_template("auth/unconfirmed.html")
+    return render_template('auth/unconfirmed.html')
+
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated \
+            and not current_user.confirmed \
+            and request.blueprint != 'auth':
+        return redirect(url_for('auth.unconfirmed'))
