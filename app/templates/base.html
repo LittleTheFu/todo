@@ -20,7 +20,7 @@
 
           {% if current_user.is_authenticated %}
             <a href="{{ url_for('main.profile') }}" class="btn btn-info" role="button">
-              <img src="{{ avatars.default(size='s') }}">
+              <img src="{{ avatars.gravatar(current_user.email_hash, size='50') }}">
               {{ current_user.email }}
             </a>
             <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">

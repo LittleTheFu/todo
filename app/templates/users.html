@@ -13,7 +13,7 @@
     <ul class="list-group">
       {% for user in users %}
         <a href="{{ url_for('main.userInfo', id=user.id) }}" class="list-group-item">
-          <img src="{{ avatars.default() }}">
+          <img src="{{ avatars.gravatar(user.email_hash) }}">
           <h3>{{ user.email }}</h3>
           <a href="{{ url_for('main.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
           {% if current_user.is_authenticated %}

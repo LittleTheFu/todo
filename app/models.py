@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
+import hashlib
 
 class Follow(db.Model):
     from_id = db.Column(db.Integer,
@@ -17,6 +18,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64),unique=True,index=True)
+    email_hash = db.Column(db.String(64))
     confirmed = db.Column(db.Boolean, default=False)
     password_hash = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
@@ -30,6 +32,8 @@ class User(UserMixin, db.Model):
                                 backref=db.backref('to_user', lazy='joined'),
                                 cascade='all, delete-orphan',
                                 lazy='dynamic')
+    def compute_email_hash(self):
+        self.email_hash = hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
 
     def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)

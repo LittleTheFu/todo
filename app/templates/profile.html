@@ -9,6 +9,8 @@
   {% endif %}
 
   <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">Logout</a>
-  <img src="{{ avatars.default() }}">
+  <br>
+  <img src="{{ avatars.gravatar(current_user.email_hash) }}">
+  <a href="" class="btn btn-info" role="button">Edit</a>
 
 {% endblock %}
