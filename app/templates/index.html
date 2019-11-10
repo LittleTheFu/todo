@@ -2,7 +2,9 @@
 
 {% block page_body %}
   <h1>Hello, Bootstrap</h1>
-  <button type="button" class="btn btn-primary">Primary</button>
+  <a href="{{ url_for('.test_mail') }}" class="btn btn-info" role="button">
+    send_mail
+  </a>
 
   <p>Local Time : {{ moment(current_time).format('LLL') }}</p>
   <p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>

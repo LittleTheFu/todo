@@ -2,9 +2,12 @@ from flask import render_template, redirect, url_for
 from . import main
 from ..models import Todo, User
 from .forms import NameForm
-from .. import db
+from .. import db, mail
 from datetime import datetime
 from flask_login import current_user
+
+# test mail
+from flask_mail import Message
 
 @main.route('/')
 def index():
@@ -75,3 +78,12 @@ def unfollow(user_id):
     if user is not None:
         current_user.unfollow(user)
     return redirect(url_for('.users'))
+
+# test email
+@main.route('/test_mail')
+def test_mail():
+    msg = Message('test_mail', sender='@.com', recipients=['@.com'])
+    msg.body='test body'
+    msg.html='html'
+    mail.send(msg)
+    return redirect(url_for('.index'))
