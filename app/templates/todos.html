@@ -13,14 +13,14 @@
           <li class="list-group-item">
             <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
             <h3>from {{ user.id}}</h3>
-            <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
+            <a href="{{ url_for('main.todo_detail', id=todo.id) }}" class="btn btn-info" role="button">
               Detail
             </a>
             {% if canEdit %}
-              <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
+              <a href="{{ url_for('main.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
                 Delete
               </a>
-              <a href="{{ url_for('.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
+              <a href="{{ url_for('main.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
                 Edit
               </a>
             {% endif %}

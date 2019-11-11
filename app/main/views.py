@@ -42,6 +42,10 @@ def todoByUser(user_id):
             canEdit = True
     return render_template( 'todos.html', user = user, todos = todos, canEdit = canEdit )
 
+@main.route('/todos/detail/<id>')
+def todo_detail(id):
+    return render_template('todo_detail.html')
+
 @main.route('/todos/del/<id>')
 def delTodo(id):
     Todo.delete(id)
