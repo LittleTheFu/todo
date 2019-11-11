@@ -46,6 +46,10 @@ def todoByUser(user_id):
 def todo_detail(id):
     return render_template('todo_detail.html')
 
+@main.route('/todos/edit/<id>')
+def todo_edit(id):
+    return render_template('todo_edit.html')
+
 @main.route('/todos/del/<id>')
 def delTodo(id):
     Todo.delete(id)

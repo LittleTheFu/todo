@@ -20,7 +20,7 @@
               <a href="{{ url_for('main.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
                 Delete
               </a>
-              <a href="{{ url_for('main.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
+              <a href="{{ url_for('main.todo_edit', id=todo.id) }}" class="btn btn-info" role="button">
                 Edit
               </a>
             {% endif %}
