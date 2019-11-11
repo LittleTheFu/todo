@@ -8,3 +8,8 @@ class NameForm(FlaskForm):
 class TodoEditForm(FlaskForm):
     name = StringField('name : ')
     submit = SubmitField('Submit')
+
+class EditProfileForm(FlaskForm):
+    about_me = StringField('about me : ')
+    submit = SubmitField('Submit')
+    cancel = SubmitField('Cancel')

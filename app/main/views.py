@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for
 from . import main
 from ..models import Todo, User
-from .forms import NameForm, TodoEditForm
+from .forms import NameForm, TodoEditForm, EditProfileForm
 from .. import db, mail
 from datetime import datetime
 from flask_login import current_user
@@ -16,6 +16,16 @@ def index():
 @main.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@main.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.about_me = form.about_me.data
+        db.session.add(current_user)
+        db.session.commit()
+        return redirect(url_for('main.profile'))
+    return render_template('edit_profile.html', form=form)
 
 @main.route('/users')
 def users():
