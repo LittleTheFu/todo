@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for
 from . import main
 from ..models import Todo, User
-from .forms import NameForm
+from .forms import NameForm, TodoEditForm
 from .. import db, mail
 from datetime import datetime
 from flask_login import current_user
@@ -47,10 +47,16 @@ def todo_detail(id):
     todo = Todo.query.get(int(id))
     return render_template('todo_detail.html', todo = todo)
 
-@main.route('/todos/edit/<id>')
+@main.route('/todos/edit/<id>', methods=['GET', 'POST'])
 def todo_edit(id):
+    form = TodoEditForm()
     todo = Todo.query.get(int(id))
-    return render_template('todo_edit.html', todo = todo)
+    if form.validate_on_submit():
+        todo.name = form.name.data
+        db.session.add(todo)
+        db.session.commit()
+        return redirect(url_for('main.todo_edit', id=id))
+    return render_template('todo_edit.html', todo = todo, form = form)
 
 @main.route('/todos/del/<id>')
 def delTodo(id):
