@@ -10,7 +10,7 @@
     <div class="col-md-6">
       <ul class="list-group">
         {% for todo in todos %}
-          <li class="list-group-item">
+          <a href="{{ url_for('main.todo_detail', id=todo.id) }}" class="list-group-item">
             <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
             <h3>from {{ user.id}}</h3>
             <a href="{{ url_for('main.todo_detail', id=todo.id) }}" class="btn btn-info" role="button">
