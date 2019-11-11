@@ -4,13 +4,19 @@
 {% block page_body %}
   <div class="container">
     <div class="row">
-      <img src="{{ avatars.gravatar(user.email_hash) }}">
-      <h1> {{ user.email }} </h1>
-      <h1> about me : {{ user.about_me }}
-      <h1> Follows: </h1>
+      <div class="col-md-1 col-md-offset-1">
+        <img src="{{ avatars.gravatar(user.email_hash, size='50') }}">
+      </div>
+      <div class="col-md-10">
+        {{ user.email }}
+        <br>
+        about me : {{ user.about_me }}
+        <br>
+        <a href="{{ url_for('main.todoByUser', user_id=user.id )}}"> todos </a>
+      </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10 col-md-offset-1">
         <ul class="list-group">
           {% for follower in followers %}
             <a href="{{ url_for('main.userInfo', id=follower.to_user.id) }}" class="list-group-item">

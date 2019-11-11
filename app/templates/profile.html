@@ -2,16 +2,16 @@
 {% block title %}This is an example page{% endblock %}
 
 {% block page_body %}
-  {% if current_user.is_authenticated %}
-    {{ current_user.email }} @ {{ current_user.password_hash }}
-  {% else %}
-    Stranger
-  {% endif %}
-
-  <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">Logout</a>
-  <br>
-  <img src="{{ avatars.gravatar(current_user.email_hash) }}">
-  about_me : {{ current_user.about_me }}
-  <a href="{{ url_for('main.edit_profile') }}" class="btn btn-info" role="button">Edit</a>
-
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-8 col-md-offset-2'>
+      <img src="{{ avatars.gravatar(current_user.email_hash) }}">
+      <br>
+      <h3>{{ current_user.email }}</h3>
+      <h3>about_me : {{ current_user.about_me }}</h3>
+      <br>
+      <a href="{{ url_for('main.edit_profile') }}" class="btn btn-info" role="button">Edit</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

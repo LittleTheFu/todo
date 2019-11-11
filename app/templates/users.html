@@ -9,7 +9,7 @@
 <div class="container">
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-10 col-md-offset-1">
     <ul class="list-group">
       {% for user in users %}
         <a href="{{ url_for('main.userInfo', id=user.id) }}" class="list-group-item">

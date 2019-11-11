@@ -2,11 +2,17 @@
 {% block title %}This is an example page{% endblock %}
 
 {% block page_body %}
-  <h1>Todo Detail</h1>
-  <h2>{{ todo.id }}</h2>
-  <h2>{{ todo.name }}</h2>
-  <h2>{{ todo.create_date }}</h2>
-  <a href="{{ url_for('main.todoByUser', user_id=todo.user_id) }}" class="btn btn-info" role="button">
-    Goto his Todo_List
-  </a>
+<div clas='container'>
+  <div class="col-md-8 col-md-offset-2">
+    <div class='row jumbotron'>
+      <h1>Todo Detail</h1>
+      <h2>{{ todo.id }}</h2>
+      <h2>{{ todo.name }}</h2>
+      <h2>{{ todo.create_date }}</h2>
+      <a href="{{ url_for('main.todoByUser', user_id=todo.user_id) }}" class="btn btn-info" role="button">
+        Goto his Todo_List
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

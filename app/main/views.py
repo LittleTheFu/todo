@@ -65,7 +65,7 @@ def todo_edit(id):
         todo.name = form.name.data
         db.session.add(todo)
         db.session.commit()
-        return redirect(url_for('main.todo_edit', id=id))
+        return redirect(url_for('main.todoByUser', user_id=todo.user_id))
     return render_template('todo_edit.html', todo = todo, form = form)
 
 @main.route('/todos/del/<id>')
