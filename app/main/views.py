@@ -44,11 +44,13 @@ def todoByUser(user_id):
 
 @main.route('/todos/detail/<id>')
 def todo_detail(id):
-    return render_template('todo_detail.html')
+    todo = Todo.query.get(int(id))
+    return render_template('todo_detail.html', todo = todo)
 
 @main.route('/todos/edit/<id>')
 def todo_edit(id):
-    return render_template('todo_edit.html')
+    todo = Todo.query.get(int(id))
+    return render_template('todo_edit.html', todo = todo)
 
 @main.route('/todos/del/<id>')
 def delTodo(id):

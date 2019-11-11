@@ -1,1 +1,9 @@
-<h1>Todo Detail</h1>
+{% extends "base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block page_body %}
+  <h1>Todo Detail</h1>
+  <h2>{{ todo.id }}</h2>
+  <h2>{{ todo.name }}</h2>
+  <h2>{{ todo.create_date }}</h2>
+{% endblock %}
