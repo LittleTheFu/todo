@@ -106,6 +106,17 @@ def unfollow(user_id):
         current_user.unfollow(user)
     return redirect(url_for('.users'))
 
+
+@main.app_errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+
+
+
+
+
+#######################
 # test email
 @main.route('/test_mail')
 def test_mail():
