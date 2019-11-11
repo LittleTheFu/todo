@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
     email_hash = db.Column(db.String(64))
     confirmed = db.Column(db.Boolean, default=False)
     password_hash = db.Column(db.String(128))
+    about_me = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
     from_viewers = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
