@@ -12,8 +12,10 @@
   <div class="col-md-10 col-md-offset-1">
     <ul class="list-group">
       {% for user in users %}
-        <a href="{{ url_for('main.userInfo', id=user.id) }}" class="list-group-item">
-          <img src="{{ avatars.gravatar(user.email_hash) }}">
+       <li class="list-group-item">
+         <a href="{{ url_for('main.userInfo', id=user.id) }}">
+           <img src="{{ avatars.gravatar(user.email_hash) }}">
+         </a>
           <h3>{{ user.email }}</h3>
           <h4> about me : {{ user.about_me }}</h4>
           <a href="{{ url_for('main.delUser', id=user.id) }}" class="btn btn-info" role="button">Delete</a>
@@ -24,9 +26,8 @@
               <a href="{{ url_for('main.follow', user_id=user.id)}}" class="btn btn-info" role="button">Follow</a>
             {% endif %}
           {% endif %}
-          <a href="{{ url_for('main.userInfo', id=user.id) }}" class="btn btn-info" role="button">Info</a>
           <a href="{{ url_for('main.todoByUser', user_id=user.id) }}" class="btn btn-info" role="button">Todos</a>
-        </a>
+        </li>
       {% endfor %}
     </ul>
   </div>
