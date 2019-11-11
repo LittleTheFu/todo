@@ -15,7 +15,7 @@
             <a href="{{ url_for('main.todo_detail', id=todo.id) }}">
               <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
             </a>
-            <a href="{{ url_for('main.userInfo', id=todo.user_id) }}">
+            <a href="{{ url_for('main.userInfo', id=todo.user.id) }}">
               <img src="{{ avatars.gravatar(todo.user.email_hash) }}">
             </a>
             <h3>{{ user.email}}</h3>
