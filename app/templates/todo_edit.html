@@ -11,4 +11,8 @@
   <div class="col-md-6">
       {{ wtf.quick_form(form) }}
   </div>
+  <br>
+  <a href="{{ url_for('main.todoByUser', user_id=todo.user_id) }}" class="btn btn-info" role="button">
+    Goto his Todo_List
+  </a>
 {% endblock %}
