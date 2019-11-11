@@ -44,7 +44,7 @@ def todos():
 
 @main.route('/todos/<user_id>')
 def todoByUser(user_id):
-    user = User.query.get(int(user_id))
+    user = User.query.get_or_404(int(user_id))
     todos = Todo.getByUserId(user_id)
     canEdit = False
     if current_user.is_authenticated:
@@ -54,13 +54,13 @@ def todoByUser(user_id):
 
 @main.route('/todos/detail/<id>')
 def todo_detail(id):
-    todo = Todo.query.get(int(id))
+    todo = Todo.query.get_or_404(int(id))
     return render_template('todo_detail.html', todo = todo)
 
 @main.route('/todos/edit/<id>', methods=['GET', 'POST'])
 def todo_edit(id):
     form = TodoEditForm()
-    todo = Todo.query.get(int(id))
+    todo = Todo.query.get_or_404(int(id))
     if form.validate_on_submit():
         todo.name = form.name.data
         db.session.add(todo)
@@ -87,21 +87,21 @@ def add():
 
 @main.route('/user_info/<id>')
 def userInfo(id):
-    user = User.query.get(int(id))
+    user = User.query.get_or_404(int(id))
     return render_template('user_info.html',
                             user = user,
                             followers = user.from_viewers.all())
 
 @main.route('/follow/<user_id>')
 def follow(user_id):
-    user = User.query.get(int(user_id))
+    user = User.query.get_or_404(int(user_id))
     if user is not None:
         current_user.follow(user)
     return redirect(url_for('.users'))
 
 @main.route('/unfollow/<user_id>')
 def unfollow(user_id):
-    user = User.query.get(int(user_id))
+    user = User.query.get_or_404(int(user_id))
     if user is not None:
         current_user.unfollow(user)
     return redirect(url_for('.users'))
