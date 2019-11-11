@@ -11,6 +11,7 @@
   <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">Logout</a>
   <br>
   <img src="{{ avatars.gravatar(current_user.email_hash) }}">
+  about_me : {{ current_user.about_me }}
   <a href="" class="btn btn-info" role="button">Edit</a>
 
 {% endblock %}

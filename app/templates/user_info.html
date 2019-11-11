@@ -6,6 +6,7 @@
     <div class="row">
       <img src="{{ avatars.gravatar(user.email_hash) }}">
       <h1> {{ user.email }} </h1>
+      <h1> about me : {{ user.about_me }}
       <h1> Follows: </h1>
     </div>
     <div class="row">
@@ -15,6 +16,7 @@
             <a href="{{ url_for('main.userInfo', id=follower.to_user.id) }}" class="list-group-item">
               <img src="{{ avatars.gravatar(follower.to_user.email_hash) }}">
               <h3>{{ follower.to_user.email }}</h3>
+              <h3>about me : {{ follower.to_user.about_me }}</h3>
             </a>
           {% endfor %}
         </ul>
