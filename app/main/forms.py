@@ -14,3 +14,7 @@ class EditProfileForm(FlaskForm):
     about_me = StringField('about me : ')
     submit = SubmitField('Submit')
     # cancel = SubmitField('Cancel')
+
+class CommentForm(FlaskForm):
+    comment = StringField('comment : ')
+    submit = SubmitField('Submit')
