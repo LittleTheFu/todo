@@ -19,6 +19,9 @@
       <ul class="list-group">
         {% for comment in todo.comments %}
          <li class="list-group-item">
+           <a href="{{ url_for('main.userInfo', id=comment.user.id) }}">
+             <img src="{{ avatars.gravatar(comment.user.email_hash, size='25') }}">
+           </a>
            {{ comment.user.email }} : {{ comment.content }}
          </li>
          {% endfor %}
