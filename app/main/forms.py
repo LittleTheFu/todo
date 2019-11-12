@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
+from flask_pagedown.fields import PageDownField
 
 class NameForm(FlaskForm):
     name = StringField('todo : ')
@@ -16,5 +17,5 @@ class EditProfileForm(FlaskForm):
     # cancel = SubmitField('Cancel')
 
 class CommentForm(FlaskForm):
-    comment = StringField('comment : ')
+    comment = PageDownField('Enter your markdown')
     submit = SubmitField('Submit')
