@@ -35,11 +35,6 @@
       <a href="{{ url_for('.userInfo', id=user.id) }}" role="button">
         <img src="{{ avatars.gravatar(user.email_hash) }}">
       </a>
-      {% if canEdit == true %}
-      <a href="{{ url_for('.add') }}" class="btn btn-info" role="button">
-        Add todo
-      </a>
-      {% endif %}
     </div>
   </div>
 </div>

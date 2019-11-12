@@ -23,6 +23,12 @@
               <img src="{{ avatars.gravatar(current_user.email_hash, size='50') }}">
               {{ current_user.email }}
             </a>
+            <a href="{{ url_for('main.todoByUser', user_id=current_user.id) }}" class="btn btn-info" role="button">
+              My Todos
+            </a>
+            <a href="{{ url_for('main.add') }}" class="btn btn-info" role="button">
+              Add Todo
+            </a>
             <a href="{{ url_for('auth.logout') }}" class="btn btn-info" role="button">
               Logout
             </a>
