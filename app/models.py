@@ -6,6 +6,24 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 import hashlib
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(128))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    todo_id = db.Column(db.Integer, db.ForeignKey('todos.id'))
+
+    @staticmethod
+    def add(user, todo, content):
+        comment = Comment()
+        comment.user = user
+        comment.todo = todo
+        comment.content = content
+        db.session.add(comment)
+        db.session.commit()
+        pass
+
+
 class Follow(db.Model):
     from_id = db.Column(db.Integer,
                         db.ForeignKey('users.id'),
@@ -23,6 +41,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     about_me = db.Column(db.String(128))
     todos = db.relationship('Todo',backref='user')
+    comments = db.relationship('Comment',backref='user')
     from_viewers = db.relationship('Follow',
                                 foreign_keys=[Follow.from_id],
                                 backref=db.backref('from_user', lazy='joined'),
@@ -103,6 +122,7 @@ class Todo(db.Model):
     name = db.Column(db.String(64), unique=True)
     create_date = db.Column(db.Date)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comments = db.relationship('Comment',backref='todo')
 
     @staticmethod
     def add(name, user):

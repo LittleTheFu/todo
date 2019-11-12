@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
 from . import main
-from ..models import Todo, User
+from ..models import Todo, User, Comment
 from .forms import NameForm, TodoEditForm, EditProfileForm, CommentForm
 from .. import db, mail
 from datetime import datetime
@@ -57,6 +57,8 @@ def todo_detail(id):
     todo = Todo.query.get_or_404(int(id))
     form = CommentForm()
     if form.validate_on_submit():
+        content = form.comment.data
+        Comment.add(current_user, todo, content)
         redirect(url_for('main.todo_detail', id=id))
     return render_template('todo_detail.html', todo = todo, form=form)
 

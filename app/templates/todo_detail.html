@@ -16,6 +16,15 @@
           Goto his Todo_List
         </a>
       </div>
+      <ul class="list-group">
+        {% for comment in todo.comments %}
+         <li class="list-group-item">
+           {{ comment.user.email }} : {{ comment.content }}
+         </li>
+         {% endfor %}
+       </ul>
+      <div>
+      </div>
     </div>
   </div>
   <div class='row'>
