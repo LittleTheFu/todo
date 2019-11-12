@@ -26,6 +26,9 @@
             <a href="{{ url_for('main.todoByUser', user_id=current_user.id) }}" class="btn btn-info" role="button">
               My Todos
             </a>
+            <a href="{{ url_for('main.todos') }}" class="btn btn-info" role="button">
+              All Todos
+            </a>
             <a href="{{ url_for('main.add') }}" class="btn btn-info" role="button">
               Add Todo
             </a>

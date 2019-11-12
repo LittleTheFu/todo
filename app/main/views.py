@@ -46,11 +46,7 @@ def todos():
 def todoByUser(user_id):
     user = User.query.get_or_404(int(user_id))
     todos = Todo.getByUserId(user_id)
-    canEdit = False
-    if current_user.is_authenticated:
-        if current_user.id == int(user_id):
-            canEdit = True
-    return render_template( 'todos.html', user = user, todos = todos, canEdit = canEdit )
+    return render_template( 'todos.html', user = user, todos = todos)
 
 @main.route('/todos/detail/<id>', methods=['GET', 'POST'])
 def todo_detail(id):

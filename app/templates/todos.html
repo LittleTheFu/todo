@@ -15,11 +15,17 @@
             <a href="{{ url_for('main.todo_detail', id=todo.id) }}">
               <h3>{{ todo.id }} : {{ todo.name }} @ {{ todo.create_date }}</h3>
             </a>
-            <a href="{{ url_for('main.userInfo', id=todo.user.id) }}">
-              <img src="{{ avatars.gravatar(todo.user.email_hash) }}">
-            </a>
-            <h3>{{ user.email}}</h3>
-            {% if canEdit %}
+            {% if todo.user %}
+              <a href="{{ url_for('main.userInfo', id=todo.user.id) }}">
+                <img src="{{ avatars.gravatar(todo.user.email_hash) }}">
+              </a>
+            {% else %}
+              <img src="{{ avatars.default() }}">(user deleted)
+            {% endif %}
+            {% if user is defined %}
+              <h3>{{ user.email}}</h3>
+            {% endif %}
+            {% if (current_user.is_authenticated) and (current_user.id == todo.user.id) %}
               <a href="{{ url_for('main.delTodo', id=todo.id) }}" class="btn btn-info" role="button">
                 Delete
               </a>
@@ -31,11 +37,13 @@
         {% endfor %}
       </ul>
     </div>
-    <div class="col-md-3">
-      <a href="{{ url_for('.userInfo', id=user.id) }}" role="button">
-        <img src="{{ avatars.gravatar(user.email_hash) }}">
-      </a>
-    </div>
+    {% if user is defined %}
+      <div class="col-md-3">
+        <a href="{{ url_for('.userInfo', id=user.id) }}" role="button">
+          <img src="{{ avatars.gravatar(user.email_hash) }}">
+        </a>
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
