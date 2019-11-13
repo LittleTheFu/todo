@@ -1,5 +1,5 @@
 
 .DS_Store
 data-dev.sqlite
-/migrations/versions/
+/migrations/
 **/__pycache__/
