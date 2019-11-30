@@ -3,3 +3,4 @@
 data-dev.sqlite
 /migrations/
 **/__pycache__/
+venv
